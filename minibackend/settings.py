@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'minibackend.wsgi.application'
 
 REDIS_VM_HOST = '34.132.95.210'
 REDIS_LOCAL_PORT = 6379
+REDIS_PASSWORD = 'laclavedeladmin'
 
 
 # Password validation
