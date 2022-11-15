@@ -3,8 +3,6 @@ from Usuarios import views
 
 
 urlpatterns = {
-    path("prueba/", views.prueba, name="prueba"),
-
-
+    path("prueba/<searchString>/<time>/<index>/<oTypeList>/<maxResultsNum>", views.search, name="prueba"),
 
 }
