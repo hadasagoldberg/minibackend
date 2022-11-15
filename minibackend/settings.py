@@ -76,8 +76,9 @@ WSGI_APPLICATION = 'minibackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-REDIS_VM_HOST = '35.194.27.231'
+REDIS_VM_HOST = '34.132.95.210'
 REDIS_LOCAL_PORT = 6379
+REDIS_PASSWORD = 'laclavedeladmin'
 
 
 # Password validation

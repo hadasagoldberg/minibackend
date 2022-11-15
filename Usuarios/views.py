@@ -8,6 +8,6 @@ from rest_framework.response import Response
 @api_view(["GET"])
 def prueba(request):
     if request.method == "GET":
-        values = redis_instance.smembers('24.1.135861')
+        values = redis_instance.ping()
         print(values)
         return Response(values, status=200)
