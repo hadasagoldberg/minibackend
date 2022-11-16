@@ -1,13 +1,138 @@
-from django.shortcuts import render
 
 # Create your views here.
-from CommonUtils.views import redis_instance
+
+from CommonUtils.views import redis_instance, separar_link
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+
+# searchstring - time - index - otypelist - maxresultsnum
 @api_view(["GET"])
-def prueba(request):
+def search(request, **kwargs):
     if request.method == "GET":
-        values = redis_instance.ping()
-        print(values)
-        return Response(values, status=200)
+        params = separar_link(kwargs["link"])
+        if len(params) == 5:
+            values = redis_instance.execute_command('INGRID.SEARCH', params[0], params[1], params[2], params[3], params[4])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# key - search - resultIni - resultsNum - sortby - order
+@api_view(["GET"])
+def ftsearch(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 6:
+            values = redis_instance.execute_command('INGRID.FTSEARCH', params[0], params[1], params[2], params[3], params[4], params[5])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# network - lat - lon - rad - time
+@api_view(["GET"])
+def regen(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 5:
+            values = redis_instance.execute_command('INGRID.REGEN', params[0], params[1], params[2], params[3], params[4])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# network - oid - time - computelist
+@api_view(["GET"])
+def regenarea(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 4:
+            values = redis_instance.execute_command('INGRID.REGENAREA', params[0], params[1], params[2], params[3])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# update
+@api_view(["GET"])
+def update(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 1:
+            values = redis_instance.execute_command('INGRID.UPDATE', params[0])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# oid - time - sourceList - networkList - excludedList - computelist
+@api_view(["GET"])
+def traverse(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 6:
+            values = redis_instance.execute_command('INGRID.TRAVERSE', params[0], params[1], params[2], params[3], params[4], params[5])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# oid - time
+@api_view(["GET"])
+def oread(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 2:
+            values = redis_instance.execute_command('INGRID.OREAD', params[0], params[1])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# oid - conceptName
+@api_view(["GET"])
+def val(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 2:
+            values = redis_instance.execute_command('INGRID.VAL', params[0], params[1])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# companyoid - cfgtype - cfgname - cfgtime -cfgjson
+@api_view(["GET"])
+def updateconfig(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 5:
+            values = redis_instance.execute_command('INGRID.UPDATECONFIG', params[0], params[1], params[2], params[3], params[4])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# companyid - gettime
+@api_view(["GET"])
+def getconfig(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 2:
+            values = redis_instance.execute_command('INGRID.GETCONFIG', params[0], params[1])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
+
+
+# companyid - gettime
+@api_view(["GET"])
+def getconfigfo(request, **kwargs):
+    if request.method == "GET":
+        params = separar_link(kwargs["link"])
+        if len(params) == 2:
+            values = redis_instance.execute_command('INGRID.GETCONFIGFO', params[0], params[1])
+            return Response(values, status=200)
+        else:
+            return Response("Faltan Parametros.", status=404)
