@@ -81,8 +81,12 @@ def traverse(request, **kwargs):
 # oid - time
 @api_view(["GET"])
 def oread(request, **kwargs):
+    print("1")
     if request.method == "GET":
+        print("2")
         params = separar_link(kwargs["link"])
+        print("3")
+        print("params", params)
         if len(params) == 2:
             values = redis_instance.execute_command('INGRID.OREAD', params[0], params[1])
             return Response(values, status=200)
@@ -136,3 +140,4 @@ def getconfigfo(request, **kwargs):
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
+
