@@ -12,7 +12,8 @@ def search(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 5:
-            values = redis_instance.execute_command('INGRID.SEARCH', params[0], params[1], params[2], params[3], params[4])
+            values = eval(redis_instance.execute_command('INGRID.SEARCH', params[0], params[1], params[2], params[3], params[4]))
+
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -24,7 +25,7 @@ def ftsearch(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 6:
-            values = redis_instance.execute_command('INGRID.FTSEARCH', params[0], params[1], params[2], params[3], params[4], params[5])
+            values = eval(redis_instance.execute_command('INGRID.FTSEARCH', params[0], params[1], params[2], params[3], params[4], params[5]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -36,7 +37,7 @@ def regen(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 5:
-            values = redis_instance.execute_command('INGRID.REGEN', params[0], params[1], params[2], params[3], params[4])
+            values = eval(redis_instance.execute_command('INGRID.REGEN', params[0], params[1], params[2], params[3], params[4]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -48,7 +49,7 @@ def regenarea(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 4:
-            values = redis_instance.execute_command('INGRID.REGENAREA', params[0], params[1], params[2], params[3])
+            values = eval(redis_instance.execute_command('INGRID.REGENAREA', params[0], params[1], params[2], params[3]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -60,7 +61,7 @@ def update(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 1:
-            values = redis_instance.execute_command('INGRID.UPDATE', params[0])
+            values = eval(redis_instance.execute_command('INGRID.UPDATE', params[0]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -72,7 +73,7 @@ def traverse(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 6:
-            values = redis_instance.execute_command('INGRID.TRAVERSE', params[0], params[1], params[2], params[3], params[4], params[5])
+            values = eval(redis_instance.execute_command('INGRID.TRAVERSE', params[0], params[1], params[2], params[3], params[4], params[5]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -84,7 +85,7 @@ def oread(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 2:
-            values = redis_instance.execute_command('INGRID.OREAD', params[0], params[1])
+            values = eval(redis_instance.execute_command('INGRID.OREAD', params[0], params[1]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -96,7 +97,7 @@ def val(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 2:
-            values = redis_instance.execute_command('INGRID.VAL', params[0], params[1])
+            values = eval(redis_instance.execute_command('INGRID.VAL', params[0], params[1]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -108,7 +109,7 @@ def updateconfig(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 5:
-            values = redis_instance.execute_command('INGRID.UPDATECONFIG', params[0], params[1], params[2], params[3], params[4])
+            values = eval(redis_instance.execute_command('INGRID.UPDATECONFIG', params[0], params[1], params[2], params[3], params[4]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -120,7 +121,7 @@ def getconfig(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 2:
-            values = redis_instance.execute_command('INGRID.GETCONFIG', params[0], params[1])
+            values = eval(redis_instance.execute_command('INGRID.GETCONFIG', params[0], params[1]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
@@ -132,7 +133,7 @@ def getconfigfo(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 2:
-            values = redis_instance.execute_command('INGRID.GETCONFIGFO', params[0], params[1])
+            values = eval(redis_instance.execute_command('INGRID.GETCONFIGFO', params[0], params[1]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
