@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)(1w)og8$^7hfgq(+f*+#r5*s8g9%ryn*n6i4uf#9m(p*@d+eb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["lambda-b.rj.r.appspot.com", "*"]
 
 
 # Application definition
