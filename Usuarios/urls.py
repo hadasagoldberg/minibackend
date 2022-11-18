@@ -2,7 +2,7 @@ from django.urls import path
 from Usuarios import views
 
 
-urlpatterns = {
+urlpatterns = [
     path("search/<link>", views.search, name="search"),
     path("ftsearch/<link>", views.ftsearch, name="ftsearch"),
     path("regen/<link>", views.regen, name="regen"),
@@ -15,4 +15,4 @@ urlpatterns = {
     path("getconfig/<link>", views.getconfig, name="getconfig"),
     path("getconfigfo/<link>", views.getconfigfo, name="getconfigfo")
 
-}
+]
