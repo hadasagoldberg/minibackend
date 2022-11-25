@@ -14,5 +14,4 @@ urlpatterns = [
     path("updateconfig/<link>", views.updateconfig, name="updateconfig"),
     path("getconfig/<link>", views.getconfig, name="getconfig"),
     path("getconfigfo/<link>", views.getconfigfo, name="getconfigfo")
-
 ]

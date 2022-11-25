@@ -125,6 +125,9 @@ def getconfig(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
         if len(params) == 2:
+            print(params[1])
+            true = True
+            false = False
             values = eval(redis_instance.execute_command('INGRID.GETCONFIG', params[0], params[1]))
             return Response(values, status=200)
         else:
