@@ -10,10 +10,10 @@ from rest_framework.response import Response
 @api_view(["GET"])
 def search(request, **kwargs):
     if request.method == "GET":
-        params = separar_link(kwargs["link"])
+        params = separar_link(str(kwargs["link"]))
         if len(params) == 5:
             values = eval(redis_instance.execute_command('INGRID.SEARCH', params[0], params[1], params[2], params[3], params[4]))
-
+            print(values)
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)

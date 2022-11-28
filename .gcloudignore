@@ -3,6 +3,6 @@
 __pycache__/
 /setup.cfg
 env/
-
+.env
 *.sql
 venv
