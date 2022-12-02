@@ -57,9 +57,10 @@ def regenarea(request, **kwargs):
 
 
 # update
-@api_view(["GET"])
+@api_view(["POST"])
 def update(request, **kwargs):
-    if request.method == "GET":
+    if request.method == "POST":
+        print(json.loads(request.body))
         params = json.loads(request.body)
         #params = separar_link(kwargs["link"])
         if len(params) == 1:
