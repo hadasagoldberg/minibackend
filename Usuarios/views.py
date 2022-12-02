@@ -62,7 +62,7 @@ def update(request, **kwargs):
     if request.method == "GET":
         params = json.loads(request.body)
         #params = separar_link(kwargs["link"])
-        if len(params) == 1:
+        if params["changes"]:
             values = eval(redis_instance.execute_command('INGRID.UPDATE', params["changes"]))
             return Response(values, status=200)
         else:
