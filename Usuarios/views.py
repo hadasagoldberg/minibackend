@@ -4,7 +4,7 @@
 from CommonUtils.views import redis_instance, separar_link
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+import json
 
 # searchstring - time - index - otypelist - maxresultsnum
 @api_view(["GET"])
@@ -48,6 +48,7 @@ def regen(request, **kwargs):
 def regenarea(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
+        params[3] = params[3].replace('*','/')
         if len(params) == 4:
             values = eval(redis_instance.execute_command('INGRID.REGENAREA', params[0], params[1], params[2], params[3]))
             return Response(values, status=200)
@@ -59,9 +60,10 @@ def regenarea(request, **kwargs):
 @api_view(["GET"])
 def update(request, **kwargs):
     if request.method == "GET":
-        params = separar_link(kwargs["link"])
+        params = json.loads(request.body)
+        #params = separar_link(kwargs["link"])
         if len(params) == 1:
-            values = eval(redis_instance.execute_command('INGRID.UPDATE', params[0]))
+            values = eval(redis_instance.execute_command('INGRID.UPDATE', params))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
