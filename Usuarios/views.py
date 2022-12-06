@@ -47,7 +47,23 @@ def regen(request, **kwargs):
 @api_view(["GET"])
 def regenarea(request, **kwargs):
     if request.method == "GET":
+        '''
+        url = kwargs["link"].split("&")
+        params = []
+        print(url)
+        for i in range(len(url)):
+            # reemplaza el nombre del parametro con el valor que le corresponde
+            urls = url[i].split("=")
+            print(url[i])
+            if len(urls) == 2:
+                params.append(str(url[i].split("=")[1]))
+            else:
+                pass
+        print(params)
+        '''
         params = separar_link(kwargs["link"])
+        #if len(params) == 5:
+         #   params[3] = params[3] + params[4]
         params[3] = params[3].replace('*','/')
         if len(params) == 4:
             values = eval(redis_instance.execute_command('INGRID.REGENAREA', params[0], params[1], params[2], params[3]))
