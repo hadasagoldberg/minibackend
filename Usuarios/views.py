@@ -10,11 +10,18 @@ import json
 @api_view(["GET"])
 def search(request, **kwargs):
     if request.method == "GET":
+        print(kwargs["link"])
         params = separar_link(str(kwargs["link"]))
+        print(params)
         if len(params) == 5:
-            values = eval(redis_instance.execute_command('INGRID.SEARCH', params[0], params[1], params[2], params[3], params[4]))
-            print(values)
-            return Response(values, status=200)
+            try: 
+                values = eval(redis_instance.execute_command('INGRID.SEARCH', params[0], params[1], params[2], params[3], params[4]))
+                
+                print(values)
+                return Response(values, status=200)
+            except:
+                return Response("No hay datos", status = 200)
+
         else:
             return Response("Faltan Parametros.", status=404)
 
@@ -91,8 +98,10 @@ def update(request, **kwargs):
 def traverse(request, **kwargs):
     if request.method == "GET":
         params = separar_link(kwargs["link"])
+        #print(params)
+        #params[2] = str(params[2]).replace("*", "/")
         if len(params) == 6:
-            values = eval(redis_instance.execute_command('INGRID.TRAVERSE', params[0], params[1], params[2], params[3], params[4], params[5]))
+            values = eval(redis_instance.execute_command('INGRID.TRAVERSE', params[0], params[1], str(params[2]).replace("*", "/"), params[3], params[4], params[5]))
             return Response(values, status=200)
         else:
             return Response("Faltan Parametros.", status=404)
